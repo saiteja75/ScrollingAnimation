@@ -1,10 +1,21 @@
-let searchBtn = document.getElementsByTagName('button');
-let inputText = document.getElementsByTagName('input');
+let box = document.querySelectorAll('.box');
 
-searchBtn[0].addEventListener("click", function(e) {
-    if (inputText[0].classList.contains('active')) {
-        inputText[0].classList.remove('active');
-    } else {
-        inputText[0].classList.add('active');
-    }
+document.addEventListener('scroll', function(e) {
+    box.forEach(element => {
+        if (inViewPort(element)) {
+            element.classList.add('show');
+        } else {
+            element.classList.remove('show');
+        }
+    });
 })
+
+function inViewPort(element) {
+    const triggerBottom = window.innerHeight;
+    let elePos = element.getBoundingClientRect().top;
+    if (elePos < triggerBottom) {
+        return true;
+    } else {
+        return false;
+    }
+}
